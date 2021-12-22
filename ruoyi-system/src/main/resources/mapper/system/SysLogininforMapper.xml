@@ -28,19 +28,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select info_id, user_name, ipaddr, login_location, browser, os, status, msg, login_time from sys_logininfor
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
-				AND ipaddr like concat('%', #{ipaddr}, '%')
+				AND ipaddr like concat(concat('%', #{ipaddr}), '%')
 			</if>
 			<if test="status != null and status != ''">
 				AND status = #{status}
 			</if>
 			<if test="userName != null and userName != ''">
-				AND user_name like concat('%', #{userName}, '%')
+				AND user_name like concat(concat('%', #{userName}), '%')
 			</if>
 			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-				and date_format(login_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+				and login_time &gt;= to_date(#{params.beginTime},'yyyy-MM-dd HH24:mi:ss')
 			</if>
 			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-				and date_format(login_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+				and login_time &lt;= to_date(#{params.endTime},'yyyy-MM-dd HH24:mi:ss')
 			</if>
 		</where>
 		order by info_id desc
