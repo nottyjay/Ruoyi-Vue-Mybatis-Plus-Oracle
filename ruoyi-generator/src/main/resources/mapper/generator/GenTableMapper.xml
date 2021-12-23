@@ -147,6 +147,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by c.sort
 	</select>
 	
+	<select id="selectMenuId" resultType="java.lang.Long">
+        SELECT seq_sys_menu.nextval
+        FROM dual
+    </select>
+	
 	<insert id="insertGenTable" parameterType="GenTable" useGeneratedKeys="true" keyProperty="tableId">
 		<selectKey keyProperty="tableId" resultType="long" order="BEFORE">
 			SELECT seq_gen_table.NEXTVAL as tableId FROM DUAL

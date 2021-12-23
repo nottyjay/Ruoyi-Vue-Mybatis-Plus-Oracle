@@ -8,8 +8,7 @@ import com.ruoyi.generator.domain.GenTable;
  *
  * @author ruoyi
  */
-public interface GenTableMapper
-{
+public interface GenTableMapper {
     /**
      * 查询业务列表
      *
@@ -56,6 +55,13 @@ public interface GenTableMapper
      * @return 业务信息
      */
     public GenTable selectGenTableByName(String tableName);
+
+    /**
+     * 获取菜单id
+     *
+     * @return seq_sys_menu.nextval
+     */
+    public long selectMenuId();
 
     /**
      * 新增业务
